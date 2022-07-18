@@ -2,7 +2,7 @@ const Joi = require("joi");
 const Category = require("../../../models/category");
 
 module.exports = {
-  home: async (req, res) => {
+  async homeCategory  (req, res){
     const categories = await Category.find();
     res.render("admin/categories", {
       title: "Categories page",
@@ -11,7 +11,7 @@ module.exports = {
     });
   },
 
-  add: async (req, res) => {
+   async add(req, res)  {
     const error = validateCategory(req.body);
 
     if (!!error) {
@@ -28,14 +28,14 @@ module.exports = {
     res.redirect("/api/category");
   },
 
-  getAddCategory: async (req, res) => {
+   async getAddCategory(req, res)  {
     res.render("admin/addCategory", {
       title: "Add category",
       layout: "../admin/layouts/main",
     });
   },
 
-  getOnecategory: async (req, res) => {
+ async  getOnecategory(req, res)  {
     try {
       const category = await Category.findById(req.params.id);
       res.render("admin/viewCategory", {
@@ -50,7 +50,7 @@ module.exports = {
     }
   },
 
-  updateById: async (req, res) => {
+   async updateById(req, res)  {
     const error = validateCategory(req.body);
 
     if (!!error) {
@@ -69,7 +69,7 @@ module.exports = {
     res.redirect("/api/category");
   },
 
-  getUpdate: async (req, res) => {
+ async   getUpdate(req, res)  {
     try {
       const category = await Category.findById(req.params.id);
       res.render("admin/updateCategory", {
@@ -83,6 +83,17 @@ module.exports = {
         return;
     }
   },
+
+  async deleteCategory(req , res ){
+    try {
+      await Category.findByIdAndDelete(req.params.id);
+      res.redirect('/api/category/')
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+      return;
+    }
+  }
 };
 
 function validateCategory(val) {
