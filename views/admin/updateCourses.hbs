@@ -1,0 +1,12 @@
+<form action="/api/course/update/{{course.id}}" method="POST">
+    <label for="name">Course name</label>
+    <input type="text" id="name" value="{{course.name}}" name="name">
+
+    <label for="author">Author name</label>
+    <input type="text" id="author" value="{{course.author}}" name="author">
+
+    <label for="img">Course img</label>
+    <input type="text" id="img" name="img" value="{{course.img}}">
+
+    <button>Update</button>
+</form>

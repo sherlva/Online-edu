@@ -1,0 +1,20 @@
+<h1>{{title}}</h1>
+
+{{#if courses.length}}
+{{#each courses}}
+<div class="courses">
+    <a href="/api/courses/{{_id}}">
+        <h3>Course name: {{name}}</h3>
+        <h4>Author: {{author}}</h4>
+        <img src="{{img}}" alt="{{img}}">
+        <br>
+        <a href="/api/course/update/{{_id}}">Update</a>
+        <a href="/api/course/delete/{{_id}}">Delete</a>
+    </a>
+</div>
+{{/each}}
+{{else}}
+<h2>Courses are empty</h2>
+{{/if}}
+
+<a href="/api/course/add">Add new course</a>
